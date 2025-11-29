@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "keywords": [],
-  "author": "",
+  "author": "Mohsen Kashefi",
   "license": "MIT",
   "private": true,
   "scripts": {
