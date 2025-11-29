@@ -1,0 +1,9 @@
+# Copy this file to .dev.vars and add your actual API key
+# Never commit .dev.vars to version control
+
+# Google Gemini API Key - Get yours at https://aistudio.google.com/app/apikey
+GEMINI_API_KEY=your-gemini-api-key-here
+
+# Optional: Specify a different Gemini model (defaults to gemini-2.0-flash-exp)
+# Available models: gemini-2.0-flash-exp, gemini-1.5-pro, gemini-1.5-flash
+# GEMINI_MODEL=gemini-1.5-pro
