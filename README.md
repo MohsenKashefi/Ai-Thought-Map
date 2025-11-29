@@ -442,7 +442,7 @@ This project is licensed under the **MIT License**.
 
 <div align="center">
 
-**Made with ❤️ using AI**
+
 
 [⭐ Star on GitHub](https://github.com) • [🐛 Report Bug](https://github.com) • [💡 Request Feature](https://github.com)
 
