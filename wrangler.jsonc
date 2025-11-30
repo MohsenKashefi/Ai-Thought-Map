@@ -3,7 +3,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
 
   // Name of your worker
-  "name": "__change_me__",
+  "name": "ai-thought-map",
 
   // Entry point for your worker
   "main": "src/worker.tsx",
@@ -22,6 +22,9 @@
   "observability": {
     "enabled": true
   },
+
+  // Enable workers.dev subdomain
+  "workers_dev": true,
 
   // Environment variables
   // Note: Values in .dev.vars override these during local development

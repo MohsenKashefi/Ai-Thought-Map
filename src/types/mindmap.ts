@@ -17,3 +17,5 @@ export interface GenerateMindMapResponse {
   mindMap?: MindMap;
   error?: string;
 }
+
+export type VisualizationStyle = 'grid' | 'tree' | 'radial' | 'timeline' | 'kanban';
