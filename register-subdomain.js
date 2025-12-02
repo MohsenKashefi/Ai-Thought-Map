@@ -5,12 +5,13 @@
  * Usage:
  * 1. Get your Cloudflare API token from: https://dash.cloudflare.com/profile/api-tokens
  * 2. Create a token with "Workers:Edit" permissions
- * 3. Run: CLOUDFLARE_API_TOKEN=your-token node register-subdomain.js
+ * 3. Get your Account ID from: https://dash.cloudflare.com/ (right sidebar)
+ * 4. Run: CLOUDFLARE_API_TOKEN=your-token CLOUDFLARE_ACCOUNT_ID=your-account-id node register-subdomain.js
  */
 
 const https = require('https');
 
-const ACCOUNT_ID = 'b73758cf519e76a1062533b1244ca587';
+const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 
 if (!API_TOKEN) {
@@ -18,7 +19,17 @@ if (!API_TOKEN) {
   console.error('\nTo get an API token:');
   console.error('1. Visit: https://dash.cloudflare.com/profile/api-tokens');
   console.error('2. Create a token with "Workers:Edit" permissions');
-  console.error('3. Run: CLOUDFLARE_API_TOKEN=your-token node register-subdomain.js');
+  console.error('3. Run: CLOUDFLARE_API_TOKEN=your-token CLOUDFLARE_ACCOUNT_ID=your-account-id node register-subdomain.js');
+  process.exit(1);
+}
+
+if (!ACCOUNT_ID) {
+  console.error('❌ Error: CLOUDFLARE_ACCOUNT_ID environment variable is required');
+  console.error('\nTo find your Account ID:');
+  console.error('1. Visit: https://dash.cloudflare.com/');
+  console.error('2. Select any site/domain');
+  console.error('3. Find "Account ID" in the right sidebar');
+  console.error('4. Run: CLOUDFLARE_API_TOKEN=your-token CLOUDFLARE_ACCOUNT_ID=your-account-id node register-subdomain.js');
   process.exit(1);
 }
 

@@ -2,10 +2,7 @@ import { useState } from "react";
 import type { MindMap, GenerateMindMapResponse } from "../../types/mindmap";
 import { MindMapVisualization } from "./MindMapVisualization";
 import { SavedMaps } from "./SavedMaps";
-import { InsightsPanel } from "./InsightsPanel";
-import { PathExplorer } from "./PathExplorer";
 import { MindMapStorage, type SavedMindMap } from "../../services/storage";
-import "../styles/insights.css";
 
 export const ThoughtMapForm: React.FC = () => {
   const [userInput, setUserInput] = useState("");
@@ -14,8 +11,6 @@ export const ThoughtMapForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentSavedId, setCurrentSavedId] = useState<string | null>(null);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
-  const [selectedConcept, setSelectedConcept] = useState<string | null>(null);
-  const [showAnalysis, setShowAnalysis] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +63,6 @@ export const ThoughtMapForm: React.FC = () => {
     setError(null);
     setCurrentSavedId(null);
     setSaveMessage(null);
-    setSelectedConcept(null);
   };
 
   const handleLoad = (saved: SavedMindMap) => {
@@ -78,17 +72,6 @@ export const ThoughtMapForm: React.FC = () => {
     setError(null);
     setSaveMessage("✓ Loaded");
     setTimeout(() => setSaveMessage(null), 3000);
-  };
-
-  const handleConceptSelect = (concept: string) => {
-    setSelectedConcept(concept);
-    // Scroll to path explorer
-    setTimeout(() => {
-      const pathExplorer = document.querySelector('.path-explorer');
-      if (pathExplorer) {
-        pathExplorer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }, 100);
   };
 
   return (
@@ -122,16 +105,6 @@ export const ThoughtMapForm: React.FC = () => {
               </button>
             )}
 
-            {mindMap && (
-              <button
-                type="button"
-                onClick={() => setShowAnalysis(!showAnalysis)}
-                className="btn btn-secondary"
-              >
-                {showAnalysis ? '📊 Hide Analysis' : '📊 Show Analysis'}
-              </button>
-            )}
-
             {saveMessage && (
               <span className="save-message">{saveMessage}</span>
             )}
@@ -146,25 +119,9 @@ export const ThoughtMapForm: React.FC = () => {
       </div>
 
       {mindMap && (
-        <>
-          <div className="result-section">
-            <MindMapVisualization mindMap={mindMap} />
-          </div>
-
-          {showAnalysis && (
-            <>
-              <InsightsPanel
-                mindMap={mindMap}
-                onConceptSelect={handleConceptSelect}
-              />
-
-              <PathExplorer
-                mindMap={mindMap}
-                selectedConcept={selectedConcept}
-              />
-            </>
-          )}
-        </>
+        <div className="result-section">
+          <MindMapVisualization mindMap={mindMap} />
+        </div>
       )}
     </div>
   );
